@@ -1,5 +1,4 @@
 require "rspec"
-require "benchmark"
 require './combination'
 
 class CombinationTest
@@ -7,7 +6,7 @@ class CombinationTest
 	describe "Check input number" do
 		it "should not be null" do
 			str = ""
-			op = (str.length == 0)
+			op = (obj.is_nil?(str))
 			expect(op).to be_truthy
 		end
 		it 'should be 10 digits long' do 

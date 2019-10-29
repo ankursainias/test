@@ -5,14 +5,22 @@ class Combination
 
   @@start = Time.now
 
+  # check number is invalid
   def invalid?(str)
-    str.nil? || !total_length(str) || zero_or_one(str)
+    is_nil?(str) || !total_length(str) || zero_or_one(str)
   end
 
+  # check number exist
+  def is_nil?(str)
+    str.length == 0
+  end
+
+  # check total length should be 10 digits
   def total_length(str)
       str.length == 10
   end
 
+  # check number contain 0 or 1
   def zero_or_one(str)
       str.split('').select{|a|(a == "0" || a == "1")}.length > 0
   end
@@ -31,10 +39,12 @@ class Combination
       hsh
   end
 
+  # specfiy relative path ( must be in current directory)
   def file_path
-    "dictionary.txt" # must be in current directory
+    "dictionary.txt"
   end
 
+  # check file exist or not, return true if exist otherwise return false
   def file_exist?(name)
     File.exist?(name)
   end
@@ -45,11 +55,13 @@ class Combination
     File.read(file_path).split.map(&:downcase)
   end
 
+  # map and find letter those in given pattern
   def find_letter_keys(str)
     letters = given_pattern
     str.split("").map{|digit|letters[digit]}
   end
 
+  # product array element
   def grouping(ary)
     ary.shift.product(*ary).map(&:join)
   end
@@ -97,6 +109,7 @@ class Combination
 
   # enter point of a program
   def main(str)
+    str = str.to_s
     #return if number not valid
     return [] if invalid?(str)
     words = convert_to_ary
