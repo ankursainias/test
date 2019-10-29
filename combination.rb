@@ -2,7 +2,9 @@
 require 'pry'
 require 'active_support/core_ext/hash/indifferent_access'
 class Combination
+  
   @@start = Time.now
+
   def valid?(str)
     str.nil? || total_length(str) || zero_or_one(str)
   end
@@ -102,6 +104,6 @@ class Combination
 
 end
 
-Combination.test_output("6686787825")
+# Combination.test_output("6686787825")
 
 
