@@ -102,7 +102,8 @@ class Combination
 
   def self.test_output(number)
     ary = self.new.main(number)
-    ary.each {|a|  print "#{[a].flatten.join(" ")}\n" }
+    p ary
+    # ary.each {|a|  print "#{[a].flatten.join(" ")}\n" }
     finish = Time.now
     print "Excution time => #{finish - @@start}s\n"
   end
