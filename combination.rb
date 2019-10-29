@@ -2,15 +2,15 @@
 require 'pry'
 require 'active_support/core_ext/hash/indifferent_access'
 class Combination
-  
+
   @@start = Time.now
 
-  def valid?(str)
-    str.nil? || total_length(str) || zero_or_one(str)
+  def invalid?(str)
+    str.nil? || !total_length(str) || zero_or_one(str)
   end
 
   def total_length(str)
-      str.length != 10
+      str.length == 10
   end
 
   def zero_or_one(str)
@@ -35,8 +35,13 @@ class Combination
     "dictionary.txt" # must be in current directory
   end
 
+  def file_exist?(name)
+    File.exist?(name)
+  end
+
    # Read dictionary file and hold all values in a array
   def convert_to_ary
+    raise "file #{file_path} not found" unless file_exist?(file_path)
     File.read(file_path).split.map(&:downcase)
   end
 
@@ -91,11 +96,11 @@ class Combination
   end
 
   # enter point of a program
-  def main(digits)
+  def main(str)
     #return if number not valid
-    return [] if valid?(digits)
+    return [] if invalid?(str)
     words = convert_to_ary
-    keys = find_letter_keys(digits)
+    keys = find_letter_keys(str)
     results = matching_records(keys,words)
     final_ary =  matches_result(results)
     final_ary << match_with_words(keys, words)
@@ -104,6 +109,5 @@ class Combination
 
 end
 
-# Combination.test_output("6686787825")
 
 
